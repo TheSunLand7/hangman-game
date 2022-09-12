@@ -1,0 +1,63 @@
+<!--
+======================================================================
+    Name        : index.html
+    Author      : xiayudev
+    Date        : 2022.09.07 | Wednesday at 12:23:01
+    Copyright   : COPYRIGHT
+    Description : This file is about final job.
+
+======================================================================
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="robots" content="index,follow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="final job" />
+        <link rel="icon" sizes="32x32" href="https://picsum.photos/32/32" />
+        <link rel="stylesheet" href="./src/main.css" />
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+        <title>Game | Hangman</title>
+    </head>
+
+    <body>
+        <header>
+            <h1>Juego del AHORCADO</h1>
+        </header>
+        <main>
+            <section class="main-container">
+                <div id="hangman">
+                    <img src="/imgs/imagen06.png" alt="Imagen del juego ahorcado" class="imagen imagen06">
+                    <img src="/imgs/imagen05.png" alt="Imagen del juego ahorcado" class="imagen imagen05">
+                    <img src="/imgs/imagen04.png" alt="Imagen del juego ahorcado" class="imagen imagen04">
+                    <img src="/imgs/imagen03.png" alt="Imagen del juego ahorcado" class="imagen imagen03">
+                    <img src="/imgs/imagen02.png" alt="Imagen del juego ahorcado" class="imagen imagen02">
+                    <img src="/imgs/imagen01.png" alt="Imagen del juego ahorcado" class="imagen imagen01">
+                    <img src="/imgs/imagen00.png" alt="Imagen del juego ahorcado" class="imagen imagen00">
+                </div>
+                <div id="guess">
+                    <div id="letters-container"></div>
+                    <div class="options">
+                        <button id="another-word">Escoger otra palabra</button>
+                        <div class="underscores"></div>
+                        <button id="track-btn">¡Dame una pista!</button>
+                        <span id="track-show"></span>
+                    </div>
+                    <button id="reset">Empezar de nuevo</button>
+                    <p id="life"></p>
+                    <p id="msg-final"></p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Some scripts -->
+        <script src="./src/main.js"></script>
+    </body>
+
+</html>

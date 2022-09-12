@@ -1,0 +1,94 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+header {
+    inline-size: 100%;
+    block-size: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main {
+    inline-size: 100%;
+    block-size: calc(100vh - 10vh);
+}
+
+.main-container {
+    inline-size: 100%;
+    block-size: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.main-container .options {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin: 30px 0;
+    height: 100px;
+}
+
+.options #another-word,  .options #track-btn{
+    margin-right: 15px;
+    background-color: #2a8;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    border: #fff;
+    outline: none;
+    padding: 14px 22px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background-color 500ms;
+}
+.options #another-word:hover,  .options #track-btn:hover, #reset:hover {
+    background-color: #288;
+}
+
+.options #track-btn {
+    margin: 0 15px;
+}
+#hangman {
+    flex-grow: 1;
+    position: relative;
+    inline-size: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+}
+
+#hangman .imagen {
+    position: absolute;
+    inline-size: 300px;
+}
+
+#guess {
+    flex-grow: 1;
+    padding: 0 350px;
+    display: flex;
+    flex-direction: column;
+}
+#letters-container {
+    inline-size: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#reset {
+    display: inline-block;
+    align-self: center;
+    background-color: #2a8;
+    color: #fff;
+    border: #fff;
+    font-weight: 600;
+    outline: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 500ms;
+}
