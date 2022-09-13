@@ -115,7 +115,7 @@ const displayLetters = (a, z) => {
 
 // Letra escogida comparar si pertenece a la palabra escogida
 function chooseLetter(letter) {
-    document.getElementById(letter).disable = true; // inhabilitar la letra escogida
+    document.getElementById(letter).disabled = true; // inhabilitar la letra escogida
     if (wordChosen.includes(letter)) {
 
         //Por cada letra de la palabra random, verificar si coincide con la letra escogida
@@ -125,12 +125,18 @@ function chooseLetter(letter) {
         $underscores.innerText = underscores.join('');
         if (underscores.join('') === wordChosen.join('')) {
             $msg.innerHTML = '<b>¡Felicidades!</b> Has adivinado correctamente la palabra secreta.'
+            for (i = 0; i < document.getElementById(letter).length; i++) {
+                document.getElementById(letter)[i].disabled = true;
+            }
         }
     } else {
         copyOfCollection[lives].style.visibility = 'hidden';
         lives--;
         if (lives === 0) {
             $msg.innerHTML = '<b>¡Lo siento!</b> Has perdido.';
+            for (i = 0; i < document.getElementById(letter).length; i++) {
+                document.getElementById(letter)[i].disabled = true;
+            }
         }
         $lives.innerText = `Te quedan ${lives} intentos`;
     };
