@@ -13,7 +13,7 @@ const $guess = document.getElementById('guess'), // Contenedor de la lógica
     $showHint = document.getElementById('track-show'),
     $anotherWord = document.getElementById('another-word'),
     $reset = document.getElementById('reset'),
-    $image = document.getElementsByClassName('imagen'),
+    $image = document.getElementsByClassName('imagen'), //Nodo de todas las imágenes
     $hangman = document.getElementById('hangman'),
     $fragment = document.createDocumentFragment();
 
@@ -113,15 +113,14 @@ const displayLetters = (a, z) => {
     $lettersContainer.appendChild($fragment);
 }
 
-function chooseLetter(letra) {
-    document.getElementById(letra).disable = true;
-    compareLetter(letra, wordChosen);
-}
+// Letra escogida comparar si pertenece a la palabra escogida
+function chooseLetter(letter) {
+    document.getElementById(letter).disable = true; // inhabilitar la letra escogida
+    if (wordChosen.includes(letter)) {
 
-function compareLetter(letter, word) {
-    if (word.includes(letter)) {
-        for (let i = 0; i < word.length; i++) {
-            if (word[i] === letter) underscores[i] = letter;
+        //Por cada letra de la palabra random, verificar si coincide con la letra escogida
+        for (let i = 0; i < wordChosen.length; i++) {
+            if (wordChosen[i] === letter) underscores[i] = letter;
         }
         $underscores.innerText = underscores.join('');
         if (underscores.join('') === wordChosen.join('')) {
@@ -142,5 +141,5 @@ const init = () => {
     displayLetters('a', 'z');
 }
 
-// ### INICIO DEL JUEGO
+// ### INICIO DEL JUEGO ###
 window.onload = init();
