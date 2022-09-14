@@ -67,7 +67,7 @@ $reset.addEventListener('click', _ => {
 $anotherWord.addEventListener('click', _ => {
     underscores = [];
     drawUnderscores(words)
-    lives = 10;
+    lives = 6;
     $lives.innerText = `Te quedan ${lives} intentos`;
     $msg.innerText = '';
     $showHint.innerText = '';
@@ -100,8 +100,8 @@ const displayLetters = (a, z) => {
         $button.style.display = 'inline-block';
         $button.style.border = '2px solid #fff';
         $button.style.color = '#fff';
-        $button.style.background = '#48e';
-        $button.style.borderRadius = '8px';
+        $button.style.background = '#E94560';
+        $button.style.borderRadius = '20px';
         $button.style.width = '60px';
         $button.style.height = '60px';
         $button.style.font = '16px Verdana';

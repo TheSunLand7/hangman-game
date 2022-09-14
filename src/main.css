@@ -3,15 +3,28 @@
     margin: 0;
 }
 
+:root {
+    --font: 'Rajdhani', sans-serif;
+}
+
+body {
+    background-color: #0F173D;
+    color: #fff;
+}
+
 header {
+    font-family: var(--font);
     inline-size: 100%;
     block-size: 10vh;
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
 
 main {
+    font-family: var(--font);
+    font-size: 20px;
     inline-size: 100%;
     block-size: calc(100vh - 10vh);
 }
@@ -34,7 +47,7 @@ main {
 
 .options #another-word,  .options #track-btn{
     margin-right: 15px;
-    background-color: #2a8;
+    background-color: #533483;
     color: #fff;
     font-weight: 600;
     font-size: 16px;
@@ -46,7 +59,7 @@ main {
     transition: background-color 500ms;
 }
 .options #another-word:hover,  .options #track-btn:hover, #reset:hover {
-    background-color: #288;
+    background-color: #500483;
 }
 
 .options #track-btn {
@@ -63,7 +76,8 @@ main {
 
 #hangman .imagen {
     position: absolute;
-    inline-size: 300px;
+    inline-size: 450px;
+    block-size: 100%;
 }
 
 #guess {
@@ -82,12 +96,12 @@ main {
 #reset {
     display: inline-block;
     align-self: center;
-    background-color: #2a8;
+    background-color: #533483;
     color: #fff;
     border: #fff;
     font-weight: 600;
     outline: none;
-    padding: 8px 12px;
+    padding: 10px 12px;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 500ms;
