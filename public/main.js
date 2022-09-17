@@ -1,7 +1,7 @@
 /**General settings */
 const { log, warn, error } = console;
 
-/**Main code */
+/** .:::::::::::::::::::::::::::: Main code ::::::::::::::::::::::::::::::.. **/
 
 // ### VARIABLES ###
 const $guess = document.getElementById('guess'), // Contenedor de la lógica
