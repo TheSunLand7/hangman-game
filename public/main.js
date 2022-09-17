@@ -56,6 +56,7 @@ let copyOfCollection = Array.from($image);
 // Mostrar la pista al jugador
 $btnPista.addEventListener('click', _ => {
     $showHint.innerText = words[randomNumber].hint;
+    $showHint.classList.toggle('hidden');
 });
 
 // Resetear el juego

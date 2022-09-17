@@ -49,6 +49,7 @@ main {
     margin-right: 15px;
     background-color: #533483;
     color: #fff;
+    font-family: var(--font);
     font-weight: 600;
     font-size: 16px;
     border: #fff;
@@ -64,6 +65,10 @@ main {
 
 .options #track-btn {
     margin: 0 15px;
+}
+
+.options .hidden {
+    display: none;
 }
 #hangman {
     flex-grow: 1;
@@ -105,4 +110,33 @@ main {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 500ms;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 768px) {
+    #guess {
+        padding: 0 20px;
+    }
+    main {
+        block-size: auto;
+    }
+    #hangman .imagen {
+        inline-size: 300px;
+    }
+    .main-container .options {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+    }
+    #reset {
+        margin: 50px 0;
+    }
+    #another-word {
+        margin-top: 50px;
+    }
+    #track-btn {
+        margin-bottom: 20px;
+    }
+    .options .underscores {
+        margin: 10px 0;
+    }
 }
