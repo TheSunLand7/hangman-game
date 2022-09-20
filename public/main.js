@@ -112,7 +112,7 @@ const displayLetters = (a, z) => {
         $button.style.borderRadius = '20px';
         $button.style.width = '60px';
         $button.style.height = '60px';
-        $button.style.font = '16px Verdana';
+        $button.style.font = '18px Helvetica';
         $button.style.margin = '5px';
         $button.style.cursor = 'pointer';
         $button.innerHTML = `<b>${letter}</b>`;
@@ -138,8 +138,8 @@ function chooseLetter(letter) {
         $underscores.innerText = underscores.join('');
         if (underscores.join('') === wordChosen.join('')) {
             Swal.fire({
-                title: '<strong>¡Felicidades!</strong>',
-                text: 'Has adivinado correctamente la palabra secreta.',
+                title: '<strong style="font-family: Rajdhani, sans-serif; color: #C3FF99;">¡Felicidades!</strong>',
+                html: '<span style="font-family: Rajdhani, sans-serif;">Has adivinado correctamente la palabra secreta.</span>',
                 position: 'center',
                 icon: 'success',
                 color: '#fff',
@@ -167,8 +167,8 @@ function chooseLetter(letter) {
         lives--;
         if (lives === 0) {
             Swal.fire({
-                title: '<strong>¡Lo siento!</strong>',
-                text: 'Has perdido :(',
+                title: '<strong style="font-family: Rajdhani, sans-serif; color: #E94560">¡Lo siento!</strong>',
+                html: '<span style="font-family: Rajdhani, sans-serif;">Has perdido :(</span>',
                 position: 'center',
                 icon: 'error',
                 showClass: {
