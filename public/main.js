@@ -138,12 +138,18 @@ function chooseLetter(letter) {
         $underscores.innerText = underscores.join('');
         if (underscores.join('') === wordChosen.join('')) {
             Swal.fire({
+                title: '<strong>¡Felicidades!</strong>',
+                text: 'Has adivinado correctamente la palabra secreta.',
                 position: 'center',
                 icon: 'success',
                 color: '#fff',
+                showClass: {
+                    popup: 'animate__animated animate__backInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__backOutUp'
+                },
                 background: '#16213E',
-                title: '¡Felicidades!',
-                text: 'Has adivinado correctamente la palabra secreta.',
                 showConfirmButton: true,
             });
             const copyButtons = document.getElementsByClassName('letra');
@@ -161,12 +167,18 @@ function chooseLetter(letter) {
         lives--;
         if (lives === 0) {
             Swal.fire({
+                title: '<strong>¡Lo siento!</strong>',
+                text: 'Has perdido :(',
                 position: 'center',
                 icon: 'error',
+                showClass: {
+                    popup: 'animate__animated animate__backInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__backOutUp'
+                },
                 color: '#fff',
                 background: '#16213E',
-                title: '¡Lo siento!',
-                text: 'Has perdido :(',
                 showConfirmButton: true,
             });
             const copyButtons = document.getElementsByClassName('letra');
