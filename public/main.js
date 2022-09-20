@@ -1,3 +1,4 @@
+// import Swal from 'sweetalert2'
 /**General settings */
 const { log, warn, error } = console;
 
@@ -7,7 +8,6 @@ const { log, warn, error } = console;
 const $guess = document.getElementById('guess'), // Contenedor de la lógica
     $lettersContainer = document.getElementById('letters-container'), // Contenedor de las letras
     $underscores = document.querySelector('#guess .underscores'), //Espacio donde se mostrará los guiones
-    $msg = document.getElementById('msg-final'),
     $lives = document.getElementById('life'),
     $btnPista = document.getElementById('track-btn'),
     $showHint = document.getElementById('track-show'),
@@ -45,7 +45,7 @@ let words = [
     wordChosen = [];
 
 // Mostrar los intentos disponibles al inicio
-$lives.innerText = `Te quedan ${lives} intentos`;
+$lives.innerHTML = `Te quedan <b style="color: #E94560">${lives}</b> intentos`;
 
 // Copia del HTMLCollection '$image' para poder iterar, agregar o eliminar
 let copyOfCollection = Array.from($image);
@@ -67,13 +67,20 @@ $reset.addEventListener('click', _ => {
 // Cambiar de palabra
 $anotherWord.addEventListener('click', _ => {
     underscores = [];
-    drawUnderscores(words)
+    drawUnderscores(words);
     lives = 6;
     $lives.innerText = `Te quedan ${lives} intentos`;
-    $msg.innerText = '';
     $showHint.innerText = '';
     for (let i = 0; i < copyOfCollection.length; i++) {
         copyOfCollection[i].style.visibility = 'visible';
+    }
+    const copyButtons = document.getElementsByClassName('letra');
+    for (let i = 0; i < copyButtons.length; i++) {
+        copyButtons[i].disabled = false;
+        copyButtons[i].style.border = '2px solid #E94560';
+        copyButtons[i].style.color = '#fff';
+        copyButtons[i].style.cursor = 'pointer';
+        copyButtons[i].style.background = '#E94560';
     }
 });
 
@@ -99,7 +106,7 @@ const displayLetters = (a, z) => {
         $button.setAttribute('id', `${letter}`);
         $button.setAttribute('onclick', `chooseLetter(\'${letter}\')`);
         $button.style.display = 'inline-block';
-        $button.style.border = '2px solid #fff';
+        $button.style.border = '2px solid #E94560';
         $button.style.color = '#fff';
         $button.style.background = '#E94560';
         $button.style.borderRadius = '20px';
@@ -117,29 +124,61 @@ const displayLetters = (a, z) => {
 // Letra escogida comparar si pertenece a la palabra escogida
 function chooseLetter(letter) {
     document.getElementById(letter).disabled = true; // inhabilitar la letra escogida
+    document.getElementById(letter).style.background = '#16213E';
+    document.getElementById(letter).style.color = '#777';
+    document.getElementById(letter).style.cursor = 'default';
+    document.getElementById(letter).style.border = '2px solid #444';
     if (wordChosen.includes(letter)) {
 
         //Por cada letra de la palabra random, verificar si coincide con la letra escogida
+        //Esta es la parte más importante
         for (let i = 0; i < wordChosen.length; i++) {
             if (wordChosen[i] === letter) underscores[i] = letter;
         }
         $underscores.innerText = underscores.join('');
         if (underscores.join('') === wordChosen.join('')) {
-            $msg.innerHTML = '<b>¡Felicidades!</b> Has adivinado correctamente la palabra secreta.'
-            for (i = 0; i < document.getElementById(letter).length; i++) {
-                document.getElementById(letter)[i].disabled = true;
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                color: '#fff',
+                background: '#16213E',
+                title: '¡Felicidades!',
+                text: 'Has adivinado correctamente la palabra secreta.',
+                showConfirmButton: true,
+            });
+            const copyButtons = document.getElementsByClassName('letra');
+            for (i = 0; i < copyButtons.length; i++) {
+                copyButtons[i].disabled = true;
+                copyButtons[i].style.background = '#16213E';
+                copyButtons[i].style.color = '#777';
+                copyButtons[i].style.cursor = 'default';
+                copyButtons[i].style.border = '2px solid #444';
             }
+            $lives.innerText = '';
         }
     } else {
         copyOfCollection[lives].style.visibility = 'hidden';
         lives--;
         if (lives === 0) {
-            $msg.innerHTML = '<b>¡Lo siento!</b> Has perdido.';
-            for (i = 0; i < document.getElementById(letter).length; i++) {
-                document.getElementById(letter)[i].disabled = true;
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                color: '#fff',
+                background: '#16213E',
+                title: '¡Lo siento!',
+                text: 'Has perdido :(',
+                showConfirmButton: true,
+            });
+            const copyButtons = document.getElementsByClassName('letra');
+            for (i = 0; i < copyButtons.length; i++) {
+                copyButtons[i].disabled = true;
+                copyButtons[i].style.background = '#16213E';
+                copyButtons[i].style.color = '#777';
+                copyButtons[i].style.cursor = 'default';
+                copyButtons[i].style.border = '2px solid #444';
             }
-        }
-        $lives.innerText = `Te quedan ${lives} intentos`;
+            $lives.innerText = '';
+        } else $lives.innerHTML = `Te quedan <b style="color: #E94560">${lives}</b> intentos`;
     };
 }
 
