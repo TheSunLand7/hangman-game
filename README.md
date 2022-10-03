@@ -1,5 +1,5 @@
-# PROYECTO FINAL - HANGMAN GAME
-Un pequeño proyecto realizado con HTML, CSS y Javascript.
-- Su demo aquí: [hangman game](https://hangman-game-iota.vercel.app/).
+# HANGMAN GAME
+A little project built with HTML, CSS and Typescript
+- See demo here: [hangman game](https://hangman-game-iota.vercel.app/).
 
-- Ícono usado de Freepik - [Flaticon](https://www.flaticon.com/free-icons/hangman)
+- Icon by Freepik - [Flaticon](https://www.flaticon.com/free-icons/hangman)
