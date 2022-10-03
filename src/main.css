@@ -79,6 +79,10 @@ main {
 	display: flex;
 	flex-direction: column;
 }
+.options #track-show {
+	display: block;
+	height: 20px;
+}
 #hangman {
 	position: relative;
 	inline-size: 100%;
