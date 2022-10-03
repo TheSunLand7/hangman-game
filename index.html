@@ -25,6 +25,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap" rel="stylesheet"> 
         <title>Game | Hangman</title>
+
     </head>
 
     <body>
@@ -46,19 +47,22 @@
                 <div id="guess">
                     <div id="letters-container"></div>
                     <div class="options">
-                        <button id="another-word">Escoger otra palabra</button>
                         <div class="underscores"></div>
-                        <button id="track-btn">¡Dame una pista!</button>
-                        <span id="track-show" class="hidden"></span>
+                        <div>
+                            <button id="another-word">Escoger otra palabra</button>
+                            <button id="reset">Empezar de nuevo</button>
+                        </div>
+                        <div class="pista">
+                            <button id="track-btn">¡Dame una pista!</button>
+                            <span id="track-show" class="hidden">Hidden</span>
+                        </div>
                     </div>
-                    <button id="reset">Empezar de nuevo</button>
                     <p id="life"></p>
                 </div>
             </section>
-        </main>
+        </main> 
 
-        <!-- Some scripts -->
-        <script src="/main.js"></script>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!--Some Scripts-->
+        <script type="module" src="src/main.ts" ></script>
     </body>
 </html>
