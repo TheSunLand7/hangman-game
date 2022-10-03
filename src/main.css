@@ -79,6 +79,7 @@ main {
 	display: flex;
 	flex-direction: column;
 }
+
 .options #track-show {
 	display: block;
 	height: 20px;
@@ -139,7 +140,7 @@ main {
 	transition: background-color 500ms;
 }
 
-@media screen and (min-width: 375px) and (max-width: 768px) {
+@media screen and (min-width: 320px) and (max-width: 768px) {
 	#guess {
 		padding: 0;
 	}
@@ -159,14 +160,22 @@ main {
 		align-items: center;
 		margin-top: 20px;
 	}
+	.options .btns {
+		display: flex;
+	}
 	#letters-container .letra {
 		inline-size: 40px;
 		block-size: 40px;
 		font-size: 16px;
 		border-radius: 14px;
 	}
-	#another-word {
-		margin-top: 50px;
+	.options #reset,
+	.options #another-word {
+		padding: 10px 6px;
+	}
+
+	.options #reset {
+		margin-left: 5px;
 	}
 	.options .underscores {
 		margin: 10px 0;
