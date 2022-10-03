@@ -1,19 +1,14 @@
 import Swal from "sweetalert2";
 
-/** .:::::::::::::::::::::::::::: Main code ::::::::::::::::::::::::::::::.. **/
-
 // ### VARIABLES ###
-const $guess = document.getElementById("guess") as HTMLDivElement, // Contenedor de la lógica
-	$lettersContainer = document.getElementById("letters-container") as HTMLDivElement, // Contenedor de las letras
+const $lettersContainer = document.getElementById("letters-container") as HTMLDivElement, // Contenedor de las letras
 	$underscores = document.querySelector("#guess .underscores") as HTMLDivElement, //Espacio donde se mostrará los guiones
 	$lives = document.getElementById("life") as HTMLParagraphElement,
 	$btnPista = document.getElementById("track-btn") as HTMLButtonElement,
 	$showHint = document.getElementById("track-show") as HTMLSpanElement,
 	$anotherWord = document.getElementById("another-word") as HTMLButtonElement,
 	$reset = document.getElementById("reset") as HTMLButtonElement,
-	$image = document.getElementsByClassName("imagen") as HTMLCollectionOf<HTMLImageElement>, //Nodo de todas las imágenes
-	$hangman = document.getElementById("hangman"),
-	$fragment = document.createDocumentFragment();
+	$image = document.getElementsByClassName("imagen") as HTMLCollectionOf<HTMLImageElement>; //Nodo de todas las imágenes
 
 type Phrase = {
 	name: string;
@@ -44,19 +39,22 @@ let words: Phrase[] = [
 	underscores: string[] = [],
 	lives = 6,
 	randomNumber: number,
-	wordChosen: Array<string> = [];
+	wordChosen: Array<string> = [],
+	RED: string = "#E94560",
+	LIME: string = "#C3FF99";
 
 // Mostrar los intentos disponibles al inicio
-$lives.innerHTML = `Te quedan <b style="color: #E94560">${lives}</b> intentos`;
+$lives.innerHTML = `Te quedan <b style="color: ${RED}">${lives}</b> intentos`;
 
 // Copia del HTMLCollection '$image' para poder iterar, agregar o eliminar
 let copyOfCollection = Array.from($image);
 
+/** .:::::::::::::::::::::::::::: Main code ::::::::::::::::::::::::::::::.. **/
 // ### EVENTOS DE BOTONES ###
 
 // Mostrar la pista al jugador
 $btnPista.addEventListener("click", (_) => {
-	$showHint.innerText = words[randomNumber].hint;
+	$showHint.textContent = words[randomNumber].hint;
 	$showHint.classList.toggle("hidden");
 });
 
@@ -70,8 +68,8 @@ $anotherWord.addEventListener("click", (_) => {
 	underscores = [];
 	drawUnderscores(words);
 	lives = 6;
-	$lives.innerHTML = `Te quedan <b style="color: #E94560">${lives}</b> intentos`;
-	$showHint.innerText = "";
+	$lives.innerHTML = `Te quedan <b style="color: ${RED}">${lives}</b> intentos`;
+	$showHint.textContent = "";
 	for (let i = 0; i < copyOfCollection.length; i++) {
 		copyOfCollection[i].style.visibility = "visible";
 	}
@@ -80,14 +78,48 @@ $anotherWord.addEventListener("click", (_) => {
 	) as HTMLCollectionOf<HTMLButtonElement>;
 	for (let i = 0; i < copyButtons.length; i++) {
 		copyButtons[i].disabled = false;
-		copyButtons[i].style.border = "2px solid #E94560";
-		copyButtons[i].style.color = "#fff";
+		copyButtons[i].style.border = `2px solid ${RED}`;
+		copyButtons[i].style.color = "#ffffff";
 		copyButtons[i].style.cursor = "pointer";
-		copyButtons[i].style.background = "#E94560";
+		copyButtons[i].style.background = RED;
 	}
 });
 
 // ### FUNCIONES ###
+type Message = {
+	color: string;
+	title: string;
+	message: string;
+};
+const messageAlert = (param: Message) => {
+	const { color, title, message } = param;
+	Swal.fire({
+		title: `<strong style="font-family: Rajdhani, sans-serif; color: ${color};">${title}</strong>`,
+		html: `<span style="font-family: Rajdhani, sans-serif;">${message}</span>`,
+		position: "center",
+		icon: "success",
+		color: "#ffffff",
+		showClass: {
+			popup: "animate__animated animate__backInDown",
+		},
+		hideClass: {
+			popup: "animate__animated animate__backOutUp",
+		},
+		background: "#16213E",
+		showConfirmButton: true,
+	});
+	const copyButtons = document.getElementsByClassName(
+		"letra"
+	) as HTMLCollectionOf<HTMLButtonElement>;
+	for (let i = 0; i < copyButtons.length; i++) {
+		copyButtons[i].disabled = true;
+		copyButtons[i].style.background = "#16213E";
+		copyButtons[i].style.color = "#777777";
+		copyButtons[i].style.cursor = "default";
+		copyButtons[i].style.border = "2px solid #444444";
+	}
+	$lives.textContent = "";
+};
 
 // Dibujar guiones de acuerdo a la palabra elegida
 const drawUnderscores = (category: Phrase[]) => {
@@ -95,7 +127,7 @@ const drawUnderscores = (category: Phrase[]) => {
 	for (let i = 0; i < category[randomNumber].name.length; i++) {
 		underscores[i] = "_";
 	}
-	$underscores.innerText = underscores.join("");
+	$underscores.textContent = underscores.join("");
 	wordChosen = category[randomNumber].name.toUpperCase().split("");
 };
 
@@ -114,85 +146,37 @@ const displayLetters = (a: string, z: string) => {
 		letra.onclick = function () {
 			letra.disabled = true; // inhabilitar la letra escogida
 			letra.style.background = "#16213E";
-			letra.style.color = "#777";
+			letra.style.color = "#777777";
 			letra.style.cursor = "default";
-			letra.style.border = "2px solid #444";
-			if (wordChosen.includes(letra.innerText)) {
+			letra.style.border = "2px solid #444444";
+			if (wordChosen.includes(letra.textContent!)) {
 				//Por cada letra de la palabra random, verificar si coincide con la letra escogida
 				//Esta es la parte más importante
 				for (let i = 0; i < wordChosen.length; i++) {
 					if (wordChosen[i] === letra.textContent) underscores[i] = letra.textContent;
 				}
-				$underscores.innerText = underscores.join("");
+				$underscores.textContent = underscores.join("");
 				if (underscores.join("") === wordChosen.join("")) {
-					Swal.fire({
-						title: '<strong style="font-family: Rajdhani, sans-serif; color: #C3FF99;">¡Felicidades!</strong>',
-						html: '<span style="font-family: Rajdhani, sans-serif;">Has adivinado correctamente la palabra secreta.</span>',
-						position: "center",
-						icon: "success",
-						color: "#fff",
-						showClass: {
-							popup: "animate__animated animate__backInDown",
-						},
-						hideClass: {
-							popup: "animate__animated animate__backOutUp",
-						},
-						background: "#16213E",
-						showConfirmButton: true,
+					messageAlert({
+						color: LIME,
+						title: "¡Felicidades!",
+						message: "Has adivinado correctamente la palabra secreta.",
 					});
-					const copyButtons = document.getElementsByClassName(
-						"letra"
-					) as HTMLCollectionOf<HTMLButtonElement>;
-					for (let i = 0; i < copyButtons.length; i++) {
-						copyButtons[i].disabled = true;
-						copyButtons[i].style.background = "#16213E";
-						copyButtons[i].style.color = "#777";
-						copyButtons[i].style.cursor = "default";
-						copyButtons[i].style.border = "2px solid #444";
-					}
-					$lives.innerText = "";
 				}
 			} else {
 				copyOfCollection[lives].style.visibility = "hidden";
 				lives--;
 				if (lives === 0) {
-					Swal.fire({
-						title: '<strong style="font-family: Rajdhani, sans-serif; color: #E94560">¡Lo siento!</strong>',
-						html: '<span style="font-family: Rajdhani, sans-serif;">Has perdido :(</span>',
-						position: "center",
-						icon: "error",
-						showClass: {
-							popup: "animate__animated animate__backInDown",
-						},
-						hideClass: {
-							popup: "animate__animated animate__backOutUp",
-						},
-						color: "#fff",
-						background: "#16213E",
-						showConfirmButton: true,
-					});
-					const copyButtons = document.getElementsByClassName(
-						"letra"
-					) as HTMLCollectionOf<HTMLButtonElement>;
-					for (let i = 0; i < copyButtons.length; i++) {
-						copyButtons[i].disabled = true;
-						copyButtons[i].style.background = "#16213E";
-						copyButtons[i].style.color = "#777";
-						copyButtons[i].style.cursor = "default";
-						copyButtons[i].style.border = "2px solid #444";
-					}
-					$lives.innerText = "";
+					messageAlert({ color: RED, title: "¡Lo siento!", message: "Has perdido :(" });
 				} else
-					$lives.innerHTML = `Te quedan <b style="color: #E94560">${lives}</b> intentos`;
+					$lives.innerHTML = `Te quedan <b style="color: ${RED}">${lives}</b> intentos`;
 			}
 		};
 	}
 };
 
-const init = () => {
+// ### INICIO DEL JUEGO ###
+window.onload = function () {
 	drawUnderscores(words);
 	displayLetters("a", "z");
 };
-
-// ### INICIO DEL JUEGO ###
-init();
